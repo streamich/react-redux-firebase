@@ -22,7 +22,7 @@
     "build:size": "cross-env SIZE=true BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/react-redux-firebase.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "watch": "npm run build:commonjs -- --watch",
-    "prepare": "npm run clean && npm run build",
+    "prepare": "npm run snyk-protect && npm run clean && npm run build",
     "prepush": "npm run lint",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
@@ -30,7 +30,8 @@
     "docs:build": "npm run docs:prepare && gitbook build -g prescottprue/react-redux-firebase && npm run docs:api",
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs:publish": "npm run docs:clean && npm run docs:build && cp CNAME _book && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:prescottprue/react-redux-firebase gh-pages --force",
-    "docs:upload": "node bin/api-docs-upload"
+    "docs:upload": "node bin/api-docs-upload",
+    "snyk-protect": "snyk protect"
   },
   "license": "MIT",
   "homepage": "http://react-redux-firebase.com",
@@ -59,7 +60,8 @@
   "dependencies": {
     "hoist-non-react-statics": "^2.3.1",
     "lodash": "^4.17.4",
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "snyk": "^1.316.1"
   },
   "peerDependencies": {
     "react": "^0.14.6 || ^15.0.0-0 || ^16.0.0-0"
@@ -126,5 +128,6 @@
     "type": "opencollective",
     "url": "https://opencollective.com/react-redux-firebase",
     "logo": "https://opencollective.com/opencollective/logo.txt"
-  }
+  },
+  "snyk": true
 }
